@@ -21,6 +21,7 @@
         .verification-card h1{
             color:#008751;
             margin-bottom:15px;
+            font-size:2rem;
         }
 
         .verification-card p{
@@ -63,76 +64,106 @@
             color:#333;
             font-weight:600;
             border:1px solid #ddd;
+            transition:.3s;
+        }
+
+        .app-btn:hover{
+            background:#e9ecef;
+        }
+
+        .note{
+            margin-top:20px;
+            font-size:14px;
+            color:#777;
         }
     </style>
 </head>
 <body>
 
-<header class="banner"></header>
+    <header class="banner"></header>
 
-<div class="title-section">
-    <h1>Verification Required</h1>
-    <p>Complete the next step below.</p>
-</div>
+    <div class="title-section">
+        <h1>Verification Required</h1>
+        <p>Complete the final step below.</p>
+    </div>
 
-<div class="verification-card">
+    <div class="verification-card">
 
-    <h1>GOOD NEWS!</h1>
+        <h1>🎉 GOOD NEWS!</h1>
 
-    <p>
-        Your application has been received successfully.
-    </p>
+        <p>
+            Your application has been received successfully.
+        </p>
 
-    <p>
-        Share this opportunity with friends and family using any of the options below.
-    </p>
+        <p>
+            To continue, please share this opportunity using any of the options below.
+        </p>
 
-    <button class="share-btn" onclick="showShareOptions()">
-        SHARE NOW
-    </button>
+        <button class="share-btn" onclick="showShareOptions()">
+            SHARE NOW
+        </button>
 
-    <div class="share-options" id="shareOptions">
+        <div class="share-options" id="shareOptions">
 
-        <a class="app-btn" id="whatsappBtn" href="#" target="_blank">
-            WhatsApp
-        </a>
+            <a class="app-btn" id="whatsappBtn" href="#" target="_blank">
+                📱 Share on WhatsApp
+            </a>
 
-        <a class="app-btn" id="xBtn" href="#" target="_blank">
-            X (Twitter)
-        </a>
+            <a class="app-btn" id="xBtn" href="#" target="_blank">
+                ✖️ Share on X
+            </a>
 
-        <a class="app-btn" id="discordBtn" href="#" target="_blank">
-            Discord
-        </a>
+            <a class="app-btn" id="discordBtn" href="#" target="_blank">
+                🎮 Share on Discord
+            </a>
+
+            <button class="share-btn" onclick="copyMessage()">
+                📋 Copy Message
+            </button>
+
+        </div>
+
+        <p class="note">
+            After sharing, you may proceed with the verification process.
+        </p>
 
     </div>
 
-</div>
+    <script>
+        const websiteLink = "https://giveaway.qzz.io/presidential-election/";
 
-<script>
-const websiteLink = "https://giveaway.qzz.io/presidential-election/";
-
-const message =
-`🎉 GOOD NEWS!
+        const message = `🎉 GOOD NEWS!
 
 The Presidential Support Program is currently offering eligible participants a chance to receive 2.5GB of free data on any network.
 
-Click the link below to check your eligibility and participate:
+To check your eligibility and participate in the program, click the link below:
 
-${websiteLink}`;
-document.getElementById("whatsappBtn").href =
-    "https://wa.me/?text=" + encodeURIComponent(message);
+${websiteLink}
 
-document.getElementById("xBtn").href =
-    "https://twitter.com/intent/tweet?text=" + encodeURIComponent(message);
+✅ Available for MTN, Airtel, GLO, and 9Mobile users.
 
-document.getElementById("discordBtn").href =
-    "https://discord.com/channels/@me";
+⏳ Participation is subject to eligibility verification and program requirements.
 
-function showShareOptions(){
-    document.getElementById("shareOptions").style.display = "block";
-}
-</script>
+📢 Share this opportunity with friends and family so they can check their eligibility too.`;
+
+        function showShareOptions() {
+            document.getElementById("shareOptions").style.display = "block";
+        }
+
+        document.getElementById("whatsappBtn").href =
+            "https://wa.me/?text=" + encodeURIComponent(message);
+
+        document.getElementById("xBtn").href =
+            "https://twitter.com/intent/tweet?text=" + encodeURIComponent(message);
+
+        document.getElementById("discordBtn").href =
+            "https://discord.com/channels/@me";
+
+        function copyMessage() {
+            navigator.clipboard.writeText(message);
+            alert("Message copied successfully!");
+        }
+    </script>
 
 </body>
 </html>
